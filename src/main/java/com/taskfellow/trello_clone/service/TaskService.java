@@ -64,7 +64,7 @@ public class TaskService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         if (priority != null && !priority.isEmpty()) {
-            return taskRepository.findByAssignedUserIdAndPriority(user.getId(), priority, pageable);
+            return taskRepository.findByAssignedUserId(user.getId(), pageable);rIdAndPriority(user.getId(), priority, pageable);
         }
         return taskRepository.findByAssignedUserId(user.getId(), pageable);
     }
