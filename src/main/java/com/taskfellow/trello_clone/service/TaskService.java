@@ -75,7 +75,10 @@ public class TaskService {
                 .orElseThrow(() -> new ResourceNotFoundException("Task not found"));
 
         String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        if(!task.getAssignedUser().getEmail().equals(currentEmail)) {
+        User currentUser = userRepository.findByEmail(currentEmail)
+        .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        // BUG: comparing Long object references with == instead of .equals()
+        if(task.getAssignedUser().getId() == currentUser.getId()) {
             throw new RuntimeException("You do not own this task");
         }
 
@@ -93,7 +96,10 @@ public class TaskService {
                 .orElseThrow(() -> new ResourceNotFoundException("Task not found"));
 
         String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        if(!task.getAssignedUser().getEmail().equals(currentEmail)) {
+        User currentUser = userRepository.findByEmail(currentEmail)
+        .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        // BUG: comparing Long object references with == instead of .equals()
+        if(task.getAssignedUser().getId() == currentUser.getId()) {
             throw new RuntimeException("You do not own this task");
         }
 
