@@ -56,8 +56,9 @@ public class TaskService {
         return savedTask;
 
     }
-    @Cacheable(value = "user_tasks")
+    // @Cacheable(value = "user_tasks")
     // 2. Get All Tasks (Only for the logged-in User)
+    @Cacheable(value = "user_tasks", key = "#priority + '_' + #pageable.pageNumber")
     public Page<Task> getMyTasks(String priority, Pageable pageable) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
