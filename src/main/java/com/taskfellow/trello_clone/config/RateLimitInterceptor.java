@@ -18,9 +18,8 @@ public class RateLimitInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String ipAddress = request.getRemoteAddr(); // Identify user by IP
+        String ipAddress = "global"; 
         Bucket tokenBucket = rateLimitingService.resolveBucket(ipAddress);
-
         ConsumptionProbe probe = tokenBucket.tryConsumeAndReturnRemaining(1);
 
         if (probe.isConsumed()) {
