@@ -33,9 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
         System.out.println("Processing Request: " + request.getRequestURI());
         System.out.println("Auth Header: " + authHeader);
         // LOGGING END
-        if (request.getRequestURI().contains("/api/tasks")) {
-            SecurityContextHolder.clearContext();
-        }
+
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
 
