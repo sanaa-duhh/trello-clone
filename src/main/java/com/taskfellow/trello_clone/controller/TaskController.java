@@ -35,7 +35,7 @@ public class TaskController {
     public ResponseEntity<Page<Task>> getMyTasks(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
-            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "createdDate") String sortBy,
             @RequestParam(required = false) String priority
     ) {
 
